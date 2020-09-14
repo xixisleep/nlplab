@@ -10,7 +10,7 @@
 
 ### 汽车实体和分词
 这是中文分词和命名实体识别的结果。
-![image](https://github.com/xuyunbiao/nlplab/blob/master/nlplab/static/img/shitishibie.png)
+![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
 
 ## 目录结构：
 
