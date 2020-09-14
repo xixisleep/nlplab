@@ -9,7 +9,7 @@
 汽车知识图谱是从汽车之家爬下来的数据，有车型、车系数据。
 
 ### 汽车实体和分词
-
+这是中文分词和命名实体识别的结果。
 ![image](https://github.com/xuyunbiao/nlplab/blob/master/left-arrow.png)
 
 ## 目录结构：
