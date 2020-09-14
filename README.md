@@ -21,20 +21,18 @@
 
 ```
 .
-├── data\ processing    // 数据清洗(已无用)
-│   └── data
+├── bert4keras //开源框架bert的民间keras版推荐使用
+├── config //配置文件,包括
+│   ├── bert预训练模型和中文字符
+│   └──pathconfig 
+├── data //存放一下训练数据
 ├── demo     // django项目路径
-│   ├── Model  // 模型层，用于封装Item类，以及neo4j和csv的读取
-│   ├── demo   // 用于写页面的逻辑(View)
-│   ├── label_data    // 标注训练集页面的保存路径
-│   │   └── handwork
-│   ├── static    // 静态资源
-│   │   ├── css
-│   │   ├── js
-│   │   └── open-iconic
-│   ├── templates   // html页面
-│   └── toolkit   // 工具库，包括预加载，命名实体识别、分词、三元组抽取、阅读理解QA等
-
+├── Model  // 模型层，用于封装Item类，以及neo4j和csv的读取
+├── nlplab  // 页面逻辑层（View）
+├── static    // 静态资源  
+├── templates    // html页面 
+├──toolkit   // 工具库，包括预加载，命名实体识别、分词、三元组抽取、阅读理解QA等
+└──weights   //bert模型训练保存的权重参数
 ```
 
 
