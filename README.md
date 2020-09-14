@@ -4,19 +4,6 @@
 
 本项目是一个集知识图谱和nlp中中文分词、命名实体识别、三元组抽取、阅读理解问答系统、情感分析、语义识别等功能于一身的实验项目。
 > 本项目的后端使用的是django框架，用它的原因是方便快捷，顺手就用了。本项目主要是实验nlp相关的功能，web能看就行。
-
-## 汽车知识图谱
-汽车知识图谱是从汽车之家爬下来的数据，有车牌、车系、车型等数据。
-
-### 汽车实体和分词
-
-这是中文分词和命名实体识别的结果。
-使用的是清华大学的thulac分词方法。
-![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
-
-![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
-实体查询的结果是：
-![shitichaxun.jpg](https://i.loli.net/2020/09/14/RTPaiyzDcGEbUoj.png)
 ## 目录结构：
 
 ```
@@ -43,11 +30,24 @@
 确保安装好python3.6和Neo4j（任意版本）
  
 安装一系列pip依赖： cd至项目根目录，运行 sudo pip3 install -r requirement.txt
+## 汽车知识图谱
+汽车知识图谱是从汽车之家爬下来的数据，有车牌、车系、车型等数据。
+
+### 汽车实体和分词
+
+这是中文分词和命名实体识别的结果。
+使用的是清华大学的thulac分词方法。
+![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
+
+![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
+实体查询的结果是：
+![shitichaxun.jpg](https://i.loli.net/2020/09/14/RTPaiyzDcGEbUoj.png)
+
 
 **1.导入数据：**
 
 将hudong_pedia.csv导入neo4j：开启neo4j，进入neo4j控制台。将bank.csv放入neo4j安装目录下的/import目录。在控制台依次输入：
-百万级以上数据建议使用neo4j-import导入
+百万级以上数据建议官方提供的 neo4j-import 工具，不然会非常慢。
 ```
 1.创建节点
 load csv with headers from 'file:///bank1.csv' as line
