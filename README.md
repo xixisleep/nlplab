@@ -16,15 +16,11 @@
 
 ![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
 实体查询的结果是：
-![](./nlplab/static/img/shitichaxun.jpg)
+![shitichaxun.jpg](https://i.loli.net/2020/09/14/RTPaiyzDcGEbUoj.png)
 ## 目录结构：
 
 ```
 .
-├── MyCrawler      // scrapy爬虫项目路径(已爬好)
-│   └── MyCrawler
-│       ├── data
-│       └── spiders
 ├── data\ processing    // 数据清洗(已无用)
 │   └── data
 ├── demo     // django项目路径
@@ -37,33 +33,16 @@
 │   │   ├── js
 │   │   └── open-iconic
 │   ├── templates   // html页面
-│   └── toolkit   // 工具库，包括预加载，命名实体识别
-│   └── KNN_predict   
-├── KNN_predict    // KNN算法预测标签
-├── dfs_tree_crawler     // 爬取互动百科农业实体树形结构的爬虫
-└── wikidataSpider    //  爬取wiki中的关系
+│   └── toolkit   // 工具库，包括预加载，命名实体识别、分词、三元组抽取、阅读理解QA等
+
 ```
-
-
-
-## 可复用资源
-
-- hudong_pedia.csv : 已经爬好的农业实体的百科页面的结构化csv文件
-- labels.txt： 5000多个手工标注的实体类别
-- predict_labels.txt:  KNN算法预测的15W多个实体的类别
-- /wikidataSpider/wikidataProcessing/wikidata_relation.csv: predict_labels.txt中实体在wikidata中对应的三元组关系
-- attributes.csv: 部分实体的属性(互动百科页面中直接得到)
-- wikidataSpider/weatherData/static_weather_list.csv： 气候类型列表
-- wikidataSpider/weatherData/weather_plant.csv：气候与植物的种植关系
-- wikidataSpider/weatherData/city_weather.csv：城市与气候的关系
-
 
 
 ## 项目配置
 
 **0.安装基本环境：**
 
-确保安装好python3和Neo4j（任意版本）
+确保安装好python3.6和Neo4j（任意版本）
  
 安装一系列pip依赖： cd至项目根目录，运行 sudo pip3 install -r requirement.txt
 
@@ -171,15 +150,6 @@ LOAD CSV WITH HEADERS FROM "file:///city_weather.csv" AS line
 MATCH (city{title:line.city}) , (weather{title:line.weather})
 CREATE (city)-[:CityWeather { type: line.relation }]->(weather)
 ```
-
-
-以上步骤是导入爬取到的关系
-
-
-**2.下载词向量模型：（如果只是为了运行项目，步骤2可以不做，预测结果已经离线处理好了）**
- 
-~~http://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.zh.zip  
-  将wiki.zh.bin放入 KNN_predict 目录 。~~
 
 
 **3.修改Neo4j用户**
