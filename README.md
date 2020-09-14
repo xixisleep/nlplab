@@ -6,12 +6,14 @@
 > 本项目的后端使用的是django框架，用它的原因是方便快捷，顺手就用了。本项目主要是实验nlp相关的功能，web能看就行。
 
 ## 汽车知识图谱
-汽车知识图谱是从汽车之家爬下来的数据，有车型、车系数据。
+汽车知识图谱是从汽车之家爬下来的数据，有车牌、车系、车型等数据。
 
 ### 汽车实体和分词
+
 这是中文分词和命名实体识别的结果。
 ![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
 
+![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
 ## 目录结构：
 
 ```
