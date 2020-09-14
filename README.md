@@ -15,7 +15,8 @@
 ![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
 
 ![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
-![](./nlplab/static/img/shitichaxun.png)
+实体查询的结果是：
+![](./nlplab/static/img/shitichaxun.jpg)
 ## 目录结构：
 
 ```
