@@ -78,49 +78,24 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 
 这样就成功的启动了django。我们进入8000端口主页面，输入文本，即可看到以下命名实体和分词的结果（确保django和neo4j都处于开启状态）
 ## 1 汽车知识图谱
-汽车知识图谱是从汽车之家网站爬下来的数据，有车牌、车系、车型等数据。第一个项目主要是实现垂直领域分词、命名实体识别，实体查询和关系查询，比较简单。
-
-### 1.1 汽车实体和分词
-
+汽车知识图谱是从汽车之家网站爬下来的数据，有车牌、车系、车型等数据。第一个项目主要是实现垂直领域分词、命名实体识别，实体查询和关系查询。
+### 1.1 中文分词和实体识别
 这是中文分词和命名实体识别的结果。
-使用的是清华大学的thulac分词方法。
+使用的是清华大学的thulac分词方法和实体识别。
 ![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
 
 ![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
 实体查询的结果是：
 ![shitichaxun.jpg](https://i.loli.net/2020/09/14/RTPaiyzDcGEbUoj.png)
 
-
-
-
-----------------------
-###  (update 2018.11.11)
-添加了农业知识问答
-![](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/1541921074856.jpg)
-
-###  (update 2018.10.26) 
-- 修改部分配置信息
-- 关系查询中，添加了2个实体间的最短路查询，从而挖掘出实体之间一些奇怪的隐含关系
-
-![image](https://i.loli.net/2018/10/27/5bd3bf6ce4472.jpg)
-
-### 农业实体识别+实体分类
-
-
-![image](https://raw.githubusercontent.com/qq547276542/blog_image/master/agri/2.png)
-
-点击实体的超链接，可以跳转到词条页面（词云采用了词向量技术）：
-
-![image](https://raw.githubusercontent.com/qq547276542/blog_image/master/agri/3.png)
-
-### 实体查询
+### 1.2 实体查询
 
 实体查询部分，我们能够搜索出与某一实体相关的实体，以及它们之间的关系：
 ![image](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/entitySearch.png)
 
 ![](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/entitySearch2.png)
 
-### 关系查询
+### 1.3 关系查询
 
 关系查询即查询三元组关系entity1-[relation]->entity2 , 分为如下几种情况:
 
@@ -134,8 +109,13 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 下图所示，是指定关系relation和第二个实体entity2的查询结果
 
 ![](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/relationSearch.png)
+----------------------
 
-### 三元组查询
+
+## 2 三元组查询
+这个项目使用的数据是
+
+### 2.1 三元组查询
 
 ![sanyuanzu.png](https://i.loli.net/2020/09/14/3TWyelwJx6kZ1zj.png)
 
@@ -212,18 +192,7 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 | 2     | Location（地点，区域）                          | “福建省”，“三明市”，“大明湖”                        |
 | 3     | Organization（机构，会议）                      | “华东师范大学”，“上海市农业委员会”                      |
 | 4     | Political economy（政治经济名词）                | “惠农补贴”，“基本建设投资”                          |
-| 5     | Animal（动物学名词，包括畜牧类，爬行类，鸟类，鱼类，等）          | “绵羊”，“淡水鱼”，“麻雀”                          |
-| 6     | Plant（植物学名词，包括水果，蔬菜，谷物，草药，菌类，植物器官，其他植物）  | “苹果”，“小麦”，“生菜”                           |
-| 7     | Chemicals（化学名词，包括肥料，农药，杀菌剂，其它化学品，术语等）    | “氮”，“氮肥”，“硝酸盐”，“吸湿剂”                     |
-| 8     | Climate（气候，季节）                           | “夏天”，“干旱”                                |
-| 9     | Food items（动植物产品）                        | “奶酪”，“牛奶”，“羊毛”，“面粉”                      |
-| 10    | Diseases（动植物疾病）                          | “褐腐病”，“晚疫病”                              |
-| 11    | Natural Disaster（自然灾害）                   | “地震”，“洪水”，“饥荒”                           |
-| 12    | Nutrients（营养素，包括脂肪，矿物质，维生素，碳水化合物等）       | “维生素A”，"钙"                               |
-| 13    | Biochemistry（生物学名词，包括基因相关，人体部位，组织器官，细胞，细菌，术语） | “染色体”，“血红蛋白”，“肾脏”，“大肠杆菌”                 |
-| 14    | Agricultural implements（农机具，一般指机械或物理设施）  | “收割机”，“渔网”                               |
-| 15    | Technology(农业相关术语，技术和措施)                 | “延后栽培"，“卫生防疫”，“扦插”                       |
-| 16    | other（除上面类别之外的其它名词实体，可以与农业无关但必须是实体）      | “加速度"，“cpu”，“计算机”，“爱鸟周”，“人民币”，“《本草纲目》”，“花岗岩” |
+
 
 
 ### 关系抽取
