@@ -10,6 +10,7 @@
 
 ### 汽车实体和分词
 
+![image](https://github.com/xuyunbiao/nlplab/blob/master/left-arrow.png)
 
 ## 目录结构：
 
