@@ -11,12 +11,11 @@
 ### 汽车实体和分词
 
 这是中文分词和命名实体识别的结果。
-使用的是清华大学的thulac方法。
+使用的是清华大学的thulac分词方法。
 ![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
 
 ![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
 实体查询的结果是：
-![image](./nlplab/static/img/shitichaxun.jpg)
 ![](./nlplab/static/img/shitichaxun.jpg)
 ## 目录结构：
 
