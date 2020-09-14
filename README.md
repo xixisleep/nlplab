@@ -30,19 +30,6 @@
 确保安装好python3.6和Neo4j（任意版本）
  
 安装一系列pip依赖： cd至项目根目录，运行 sudo pip3 install -r requirement.txt
-## 汽车知识图谱
-汽车知识图谱是从汽车之家爬下来的数据，有车牌、车系、车型等数据。
-
-### 汽车实体和分词
-
-这是中文分词和命名实体识别的结果。
-使用的是清华大学的thulac分词方法。
-![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
-
-![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
-实体查询的结果是：
-![shitichaxun.jpg](https://i.loli.net/2020/09/14/RTPaiyzDcGEbUoj.png)
-
 
 **1.导入数据：**
 
@@ -80,16 +67,31 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 
 
 
-**3.修改Neo4j用户**
+**2.修改Neo4j用户**
 
 进入demo/Model/neo_models.py,修改第9行的neo4j账号密码，改成你自己的
 
-**4.启动服务**
+**3.启动服务**
 
 运行脚本：python manage.py runserver
 
 
 这样就成功的启动了django。我们进入8000端口主页面，输入文本，即可看到以下命名实体和分词的结果（确保django和neo4j都处于开启状态）
+## 1 汽车知识图谱
+汽车知识图谱是从汽车之家网站爬下来的数据，有车牌、车系、车型等数据。第一个项目主要是实现垂直领域分词、命名实体识别，实体查询和关系查询，比较简单。
+
+### 1.1 汽车实体和分词
+
+这是中文分词和命名实体识别的结果。
+使用的是清华大学的thulac分词方法。
+![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
+
+![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
+实体查询的结果是：
+![shitichaxun.jpg](https://i.loli.net/2020/09/14/RTPaiyzDcGEbUoj.png)
+
+
+
 
 ----------------------
 ###  (update 2018.11.11)
