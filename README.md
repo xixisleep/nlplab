@@ -48,108 +48,38 @@
 
 **1.导入数据：**
 
-将hudong_pedia.csv导入neo4j：开启neo4j，进入neo4j控制台。将hudong_pedia.csv放入neo4j安装目录下的/import目录。在控制台依次输入：
+将hudong_pedia.csv导入neo4j：开启neo4j，进入neo4j控制台。将bank.csv放入neo4j安装目录下的/import目录。在控制台依次输入：
+百万级以上数据建议使用neo4j-import导入
+```
+1.创建节点
+load csv with headers from 'file:///bank1.csv' as line
+create(bank:Bank{name:line.bank,count:line.count})
+2.创建节点
+load csv with headers from 'file:///series.csv' as line
+create(series:Series{name:line.series,count:line.count})
+3创建索引
+CREATE CONSTRAINT ON (p:Bank)
+ASSERT p.name IS UNIQUE
+4.创建关系
+load csv with headers from 'file:///series.csv' as line
+match (entity1:Bank{name:line.bank}),(entity2:Series{name:line.series})
+create(entity1)-[:subSeries{subSeries:line.relation}]->(entity2)
+5.创建节点#这个type的类型不唯一 创建关系的时候回出现问题
+load csv with headers from 'file:///type_entity.csv' as line
+create(t:CarType{name:line.type})
 
-```
-// 将hudong_pedia.csv 导入
-LOAD CSV WITH HEADERS  FROM "file:///hudong_pedia.csv" AS line  
-CREATE (p:HudongItem{title:line.title,image:line.image,detail:line.detail,url:line.url,openTypeList:line.openTypeList,baseInfoKeyList:line.baseInfoKeyList,baseInfoValueList:line.baseInfoValueList})  
-
-// 新增了hudong_pedia2.csv
-LOAD CSV WITH HEADERS  FROM "file:///hudong_pedia2.csv" AS line  
-CREATE (p:HudongItem{title:line.title,image:line.image,detail:line.detail,url:line.url,openTypeList:line.openTypeList,baseInfoKeyList:line.baseInfoKeyList,baseInfoValueList:line.baseInfoValueList})  
-```
-```
-// 创建索引
-CREATE CONSTRAINT ON (c:HudongItem)
-ASSERT c.title IS UNIQUE
+CREATE CONSTRAINT ON (p:CarType)
+ASSERT p.name IS UNIQUE
+6创建关系  
+load csv with headers from 'file:///series_type_relation.csv' as line
+match (entity1:Series{name:line.series}),(entity2:CarType{name:line.type})
+create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 ```
 
-以上两步的意思是，将hudong_pedia.csv导入neo4j作为结点，然后对titile属性添加UNIQUE（唯一约束/索引）
 
 *（如果导入的时候出现neo4j jvm内存溢出，可以在导入前，先把neo4j下的conf/neo4j.conf中的dbms.memory.heap.initial_size 和dbms.memory.heap.max_size调大点。导入完成后再把值改回去）*
 
 
-
-进入/wikidataSpider/wikidataProcessing中，将new_node.csv,wikidata_relation.csv,wikidata_relation2.csv三个文件放入neo4j的import文件夹中（运行relationDataProcessing.py可以得到这3个文件），然后分别运行
-```
-// 导入新的节点
-LOAD CSV WITH HEADERS FROM "file:///new_node.csv" AS line
-CREATE (:NewNode { title: line.title })
-
-//添加索引
-CREATE CONSTRAINT ON (c:NewNode)
-ASSERT c.title IS UNIQUE
-
-//导入hudongItem和新加入节点之间的关系
-LOAD CSV  WITH HEADERS FROM "file:///wikidata_relation2.csv" AS line
-MATCH (entity1:HudongItem{title:line.HudongItem}) , (entity2:NewNode{title:line.NewNode})
-CREATE (entity1)-[:RELATION { type: line.relation }]->(entity2)
-
-LOAD CSV  WITH HEADERS FROM "file:///wikidata_relation.csv" AS line
-MATCH (entity1:HudongItem{title:line.HudongItem1}) , (entity2:HudongItem{title:line.HudongItem2})
-CREATE (entity1)-[:RELATION { type: line.relation }]->(entity2)
-```
-
-**导入实体属性(数据来源: 互动百科)**
-
-将attributes.csv放到neo4j的import目录下，然后执行
-
-```cypher
-LOAD CSV WITH HEADERS FROM "file:///attributes.csv" AS line
-MATCH (entity1:HudongItem{title:line.Entity}), (entity2:HudongItem{title:line.Attribute})
-CREATE (entity1)-[:RELATION { type: line.AttributeName }]->(entity2);
-                                                            
-LOAD CSV WITH HEADERS FROM "file:///attributes.csv" AS line
-MATCH (entity1:HudongItem{title:line.Entity}), (entity2:NewNode{title:line.Attribute})
-CREATE (entity1)-[:RELATION { type: line.AttributeName }]->(entity2);
-                                                            
-LOAD CSV WITH HEADERS FROM "file:///attributes.csv" AS line
-MATCH (entity1:NewNode{title:line.Entity}), (entity2:NewNode{title:line.Attribute})
-CREATE (entity1)-[:RELATION { type: line.AttributeName }]->(entity2);
-                                                            
-LOAD CSV WITH HEADERS FROM "file:///attributes.csv" AS line
-MATCH (entity1:NewNode{title:line.Entity}), (entity2:HudongItem{title:line.Attribute})
-CREATE (entity1)-[:RELATION { type: line.AttributeName }]->(entity2)  
-
-//我们建索引的时候带了label，因此只有使用label时才会使用索引，这里我们的实体有两个label，所以一共做2*2=4次。当然，可以建立全局索引，即对于不同的label使用同一个索引
-                                                            
-          
-                                                                                                                         
-```
-
-**导入气候名称:**
-
-将wikidataSpider/weatherData/static_weather_list.csv放在指定的位置(import文件夹下)
-
-```
-//导入节点
-LOAD CSV WITH HEADERS FROM "file:///static_weather_list.csv" AS line
-MERGE (:Weather { title: line.title })
-
-//添加索引
-CREATE CONSTRAINT ON (c:Weather)
-ASSERT c.title IS UNIQUE
-```
-
-**导入气候与植物的关系**
-
-```
-
-将wikidataSpider/weatherData/weather_plant.csv放在指定的位置(import文件夹下)
-//导入hudongItem和新加入节点之间的关系
-LOAD CSV  WITH HEADERS FROM "file:///weather_plant.csv" AS line
-MATCH (entity1:Weather{title:line.Weather}) , (entity2:HudongItem{title:line.Plant})
-CREATE (entity1)-[:Weather2Plant { type: line.relation }]->(entity2)
-导入城市的气候
-
-将city_weather.csv放在指定的位置(import 文件夹下)
-(这步大约需要15分钟左右)
-//导入城市对应的气候
-LOAD CSV WITH HEADERS FROM "file:///city_weather.csv" AS line
-MATCH (city{title:line.city}) , (weather{title:line.weather})
-CREATE (city)-[:CityWeather { type: line.relation }]->(weather)
-```
 
 
 **3.修改Neo4j用户**
@@ -158,11 +88,8 @@ CREATE (city)-[:CityWeather { type: line.relation }]->(weather)
 
 **4.启动服务**
 
-进入demo目录，然后运行脚本：
+运行脚本：python manage.py runserver
 
-```
-sudo sh django_server_start.sh
-```
 
 这样就成功的启动了django。我们进入8000端口主页面，输入文本，即可看到以下命名实体和分词的结果（确保django和neo4j都处于开启状态）
 
@@ -208,9 +135,9 @@ sudo sh django_server_start.sh
 
 ![](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/relationSearch.png)
 
+### 三元组查询
 
-
-![](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/relationSearch2.png)
+![sanyuanzu.png](https://i.loli.net/2020/09/14/3TWyelwJx6kZ1zj.png)
 
 ### 知识的树形结构
 
@@ -252,16 +179,6 @@ sudo sh django_server_start.sh
 ## 思路
 
 ### 命名实体识别:
-
-使用thulac工具进行分词，词性标注，命名实体识别（仅人名，地名，机构名） 
-为了识别农业领域特定实体，我们需要： 
-
-1. 分词，词性标注，命名实体识别 
-2. 以识别为命名实体（person，location，organzation）的，若实体库没有，可以标注出来 
-3. 对于非命名实体部分，采用一定的词组合和词性规则，在O(n)时间扫描所有分词，过滤掉不可能为农业实体的部分（例如动词肯定不是农业实体） 
-4. 对于剩余词及词组合，匹配知识库中以分好类的实体。如果没有匹配到实体，或者匹配到的实体属于0类（即非实体），则将其过滤掉。 
-5. 实体的分类算法见下文。
-
 
 ### 实体分类：
 
