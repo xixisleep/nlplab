@@ -113,10 +113,30 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 ----------------------
 
 
-## 2 三元组查询
-这个项目使用的数据是
+## 2 三元组抽取
+这个项目使用的数据是https://ai.baidu.com/broad/download?dataset=sked
+A sample：
+{
+    "text": "《新駌鸯蝴蝶梦》是黄安的音乐作品，收录在《流金十载全记录》专辑中",
+    "spo_list": [
+        {
+            "subject": "新駌鸯蝴蝶梦",
+            "predicate": "所属专辑",
+            "object": "流金十载全记录",
+            "subject_type": "歌曲",
+            "object_type": "音乐专辑"
+        },
+        {
+            "subject": "新駌鸯蝴蝶梦",
+            "predicate": "歌手",
+            "object": "黄安",
+            "subject_type": "歌曲",
+            "object_type": "人物"
+        }
+    ]
+}
 
-### 2.1 三元组查询
+### 2.1 三元组抽取
 
 ![sanyuanzu.png](https://i.loli.net/2020/09/14/3TWyelwJx6kZ1zj.png)
 
