@@ -91,7 +91,6 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 ### 1.2 实体查询
 
 实体查询部分，我们能够搜索出与某一实体相关的实体，以及它们之间的关系：
-![image](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/entitySearch.png)
 
 ![](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/entitySearch2.png)
 
@@ -106,9 +105,9 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 * 指定第一个实体entity1和第二个实体entity2
 * 指定第一个实体entity1和第二个实体entity2以及关系relation
 
-下图所示，是指定关系relation和第二个实体entity2的查询结果
+下图所示，是指定第一个实体entity1和第二个实体entity2的查询结果
 
-![](https://raw.githubusercontent.com/CrisJk/SomePicture/master/blog_picture/relationSearch.png)
+![relsearch.png](https://i.loli.net/2020/09/15/El8ukjewXgvUax4.png)
 ----------------------
 
 
