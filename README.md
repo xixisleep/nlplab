@@ -138,8 +138,15 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
     ]
 }
 ```
-### 2.1 三元组抽取
 
+就是从这个text中抽取出（新駌鸯蝴蝶梦，所属专辑，流金十载全记录）和（新駌鸯蝴蝶梦，歌手，黄安），这个样本中是一对多的关系。
+### 2.1 三元组抽取
+下面展示一个抽取示例，使用的算法包含在toolkit目录下面的roberta_relation_extraction.py
+基于Bert的三元组抽取模型结构示意图：
+![]https://kexue.fm/usr/uploads/2020/01/2014723975.png
+
+
+**结果展示**
 ![sanyuanzu.png](https://i.loli.net/2020/09/14/3TWyelwJx6kZ1zj.png)
 
 ### 知识的树形结构
