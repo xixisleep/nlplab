@@ -143,7 +143,7 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 ### 2.1 三元组抽取
 下面展示一个抽取示例，使用的算法包含在toolkit目录下面的roberta_relation_extraction.py
 基于Bert的三元组抽取模型结构示意图：
-![]https://kexue.fm/usr/uploads/2020/01/2014723975.png
+![](https://kexue.fm/usr/uploads/2020/01/2014723975.png)
 
 
 **结果展示**
