@@ -82,9 +82,10 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 ### 1.1 中文分词和实体识别
 这是中文分词和命名实体识别的结果。
 使用的是清华大学的thulac分词方法和实体识别。
-**分词**
-![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
+
 **实体识别**
+![shitishibie.png](https://i.loli.net/2020/09/14/bDAu4PLnfa2JTYM.png)
+**分词**
 ![zhongwenfenci.png](https://i.loli.net/2020/09/14/vyS7VLRKl3ZsaBt.png)
 
 
