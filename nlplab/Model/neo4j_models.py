@@ -32,7 +32,7 @@ class Neo4j_Handle():
 		answer = self.graph.run("MATCH (n1:Bank {name:\""+entity1+"\"})- [rel] -> (n2) RETURN n1,rel,n2" ).data()
 		#基于车系查询，注意此处额外的空格
 		if(len(answer) == 0):
-			answer = self.graph.run("MATCH (n1:Serise {name:\""+entity1+" \"})- [rel] - (n2) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1:Series {name:\""+entity1+"\"})- [rel] - (n2) RETURN n1,rel,n2" ).data()
 		return answer
 
 	#关系查询：实体2
@@ -41,7 +41,7 @@ class Neo4j_Handle():
 		answer = self.graph.run("MATCH (n1)<- [rel] - (n2:Bank {name:\""+entity1+"\"}) RETURN n1,rel,n2" ).data()
 		if(len(answer) == 0):
 			#基于车系
-			answer = self.graph.run("MATCH (n1) - [rel] - (n2:Serise {name:\""+entity1+" \"}) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1) - [rel] - (n2:Series {name:\""+entity1+"\"}) RETURN n1,rel,n2" ).data()
 		return answer
 
 	#关系查询：实体1+关系
@@ -55,32 +55,32 @@ class Neo4j_Handle():
 		print(entity,relation)
 		answer = self.graph.run("MATCH (n1)- [rel:RELATION {type:\""+relation+"\"}] -> (n2:Bank {name:\"" + entity + "\"}) RETURN n1,rel,n2" ).data()
 		if(len(answer) == 0):
-			answer = self.graph.run("MATCH (n1)- [rel:RELATION {type:\""+relation+"\"}] -> (n2:Serise {name:\"" + entity + " \"}) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1)- [rel:RELATION {type:\""+relation+"\"}] -> (n2:Series {name:\"" + entity + "\"}) RETURN n1,rel,n2" ).data()
 		return answer
 
 	#关系查询：实体1+实体2(注意Entity2的空格）
 	def findRelationByEntities(self,entity1,entity2):
 		#品牌 + 品牌
-		answer = self.graph.run("MATCH (n1:Bank {name:\"" + entity1 + "\"})- [rel] -> (n2:Bank{name:\""+entity2+" \"}) RETURN n1,rel,n2" ).data()
+		answer = self.graph.run("MATCH (n1:Bank {name:\"" + entity1 + "\"})- [rel] -> (n2:Bank{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
 		if(len(answer) == 0):
 			#品牌 + 系列
-			answer = self.graph.run("MATCH (n1:Bank {name:\"" + entity1 + "\"})- [rel] -> (n2:Serise{name:\""+entity2+" \"}) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1:Bank {name:\"" + entity1 + "\"})- [rel] -> (n2:Series{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
 		if(len(answer) == 0):
 			#系列 + 品牌
-			answer = self.graph.run("MATCH (n1:Serise {name:\"" + entity1 + "\"})- [rel] -> (n2:Bank{name:\""+entity2+" \"}) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1:Series {name:\"" + entity1 + "\"})- [rel] -> (n2:Bank{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
 		if(len(answer) == 0):
 			#系列 + 系列
-			answer = self.graph.run("MATCH (n1:Serise {name:\"" + entity1 + "\"})- [rel] -> (n2:Serise{name:\""+entity2+" \"}) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1:Series {name:\"" + entity1 + "\"})- [rel] -> (n2:Series{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
 		return answer
 
 	#查询数据库中是否有对应的实体-关系匹配
 	def findEntityRelation(self,entity1,relation,entity2):
 		answer = self.graph.run("MATCH (n1:Bank {name:\"" + entity1 + "\"})- [rel:subbank {type:\""+relation+"\"}] -> (n2:Bank{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
 		if(len(answer) == 0):
-			answer = self.graph.run("MATCH (n1:Bank {name:\"" + entity1 + "\"})- [rel:subbank {type:\""+relation+"\"}] -> (n2:Serise{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1:Bank {name:\"" + entity1 + "\"})- [rel:subbank {type:\""+relation+"\"}] -> (n2:Series{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
 		if(len(answer) == 0):
-			answer = self.graph.run("MATCH (n1:Serise {name:\"" + entity1 + "\"})- [rel:subbank {type:\""+relation+"\"}] -> (n2:Bank{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1:Series {name:\"" + entity1 + "\"})- [rel:subbank {type:\""+relation+"\"}] -> (n2:Bank{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
 		if(len(answer) == 0):
-			answer = self.graph.run("MATCH (n1:Serise {name:\"" + entity1 + "\"})- [rel:subbank {type:\""+relation+"\"}] -> (n2:Serise{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
+			answer = self.graph.run("MATCH (n1:Series {name:\"" + entity1 + "\"})- [rel:subbank {type:\""+relation+"\"}] -> (n2:Series{name:\""+entity2+"\"}) RETURN n1,rel,n2" ).data()
 
 		return answer

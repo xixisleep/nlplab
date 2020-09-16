@@ -23,7 +23,7 @@ from . import ner_view
 from . import relation_view
 from . import triple_view
 from . import kgqa_view
-
+from . import sentiment_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', index_view.index),
@@ -34,4 +34,6 @@ urlpatterns = [
     url(r'^extract_triple-post',triple_view.extract_triple),
     url(r'^kgqa',kgqa_view.kgqa),
     url(r'^question-post',kgqa_view.kgqa_question),
+    url(r'^sentiment',sentiment_view.sentiment_text),
+    url(r'^sentiment-post',sentiment_view.sentiment_text),
 ]
