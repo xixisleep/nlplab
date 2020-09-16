@@ -3,7 +3,7 @@
 ## 项目介绍：
 
 本项目是一个集知识图谱和nlp中中文分词、命名实体识别、三元组抽取、阅读理解问答系统、情感分析、语义识别等功能于一身的实验项目。
-> 本项目的后端使用的是django框架，用它的原因是方便快捷，顺手就用了。本项目主要是实验nlp相关的功能，web能看就行。
+> 本项目的后端使用的是django框架，用它的原因是方便快捷，不考虑高并发和性能，仅仅做Demo。本项目主要是实验nlp相关的功能。
 ## 目录结构：
 
 ```
@@ -143,6 +143,7 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 ### 2.1 三元组抽取
 下面展示一个抽取示例，使用的算法包含在toolkit目录下面的roberta_relation_extraction.py
 基于Bert的三元组抽取模型结构示意图：
+
 ![](https://kexue.fm/usr/uploads/2020/01/2014723975.png)
 
 
