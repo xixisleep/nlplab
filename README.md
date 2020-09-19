@@ -150,3 +150,5 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 **结果展示**
 ![sanyuanzu.png](https://i.loli.net/2020/09/14/3TWyelwJx6kZ1zj.png)
 
+### 3 情感分析
+正在更新中，还没码好。。。。。。
