@@ -161,3 +161,6 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 
 ![sentiment.png](https://i.loli.net/2020/09/22/UpxavhJAdHctyzL.png)
 
+### 4 文本生成
+下面展示的是一个文本标题生成的任务
+coding中
