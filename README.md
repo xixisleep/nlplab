@@ -145,14 +145,19 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 使用的robert模型，效果还不错。
 基于Bert的三元组抽取模型结构示意图：
 
-![](https://kexue.fm/usr/uploads/2020/01/2014723975.png)
+
+![berttriple.png](https://i.loli.net/2020/09/22/Hm7vrt8OMRUkpYN.png)
 
 
 **结果展示**
+
 ![sanyuanzu.png](https://i.loli.net/2020/09/14/3TWyelwJx6kZ1zj.png)
 
 ### 3 情感分析
 下面展示一个情感分析示例，使用的算法包含在toolkit目录下面的albert_sentiment.py
 使用的是albert  base版模型，比较轻快。
+
 示例：
+
 ![sentiment.png](https://i.loli.net/2020/09/22/UpxavhJAdHctyzL.png)
+
