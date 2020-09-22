@@ -154,4 +154,5 @@ create(entity1)-[:Subseries{series_type:line.relation}]->(entity2)
 ### 3 情感分析
 下面展示一个情感分析示例，使用的算法包含在toolkit目录下面的albert_sentiment.py
 使用的是albert  base版模型，比较轻快。
-示例正在更新中，还没码好。。。。。。
+示例：
+![sentiment.png](https://i.loli.net/2020/09/22/UpxavhJAdHctyzL.png)
